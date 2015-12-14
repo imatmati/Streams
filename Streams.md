@@ -142,10 +142,11 @@ With pipes
  
 Paused mode without n.
 
-        var read;
-        while ( (read = bufwrapper.read()) != null) {
-            console.log (read.toString("utf8"));
-        }
+        bufwrapper.on("readable", function() {
+        var read = bufwrapper.read()
+        if (read)
+            console.log(read.toString("utf8"));
+        })
 Flowing mode
 
         var read = new Buffer(0);
